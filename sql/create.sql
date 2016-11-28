@@ -8,7 +8,7 @@ CREATE TABLE `Cliente` (
   UNIQUE INDEX `id_UNIQUE` (`id` ASC));
 
 CREATE TABLE `Fisico` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `cpf` VARCHAR(45) NOT NULL,
   `rg` VARCHAR(45) NOT NULL,
   `renda` VARCHAR(45) NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE `Fisico` (
   FOREIGN KEY (`id`) REFERENCES `Cliente` (`id`));
 
 CREATE TABLE `Juridico` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `cnpj` VARCHAR(45) NOT NULL,
   `porte` VARCHAR(45) NOT NULL,
   `tipo` VARCHAR(45) NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE `Juridico` (
   FOREIGN KEY (`id`)  REFERENCES `Cliente` (`id`));
 
 CREATE TABLE `Entrega` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `endereco` VARCHAR(45) NOT NULL,
   `frete` FLOAT NOT NULL,
   `data_despache` DATETIME NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE `Entrega` (
   CONSTRAINT C1 CHECK(data_recepcao > data_despache));
 
 CREATE TABLE `Pedido` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `data` DATETIME NOT NULL,
   PRIMARY KEY (`id`));
 
@@ -58,7 +58,7 @@ CREATE TABLE `Venda` (
   REFERENCES `Pedido` (`id`));
 
 CREATE TABLE `Produto` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(255) NOT NULL,
   `descricao` VARCHAR(255) NOT NULL,
   `data_criacao` DATETIME NOT NULL,
@@ -79,7 +79,7 @@ CREATE TABLE `Item` (
   REFERENCES `Pedido` (`id`));
 
 CREATE TABLE `Preco` (
-  produto INT NOT NULL,
+  produto INT NOT NULL AUTO_INCREMENT,
   `id` INT NOT NULL,
   `preco` FLOAT NOT NULL,
   `data` DATETIME NOT NULL,
