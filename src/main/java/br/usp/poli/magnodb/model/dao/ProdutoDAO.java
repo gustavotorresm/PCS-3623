@@ -4,10 +4,9 @@ import br.usp.poli.magnodb.model.Produto;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by gustavo on 28/11/16.
@@ -41,9 +40,61 @@ public class ProdutoDAO extends DBConnector {
             statement.setDate(3, new Date(produto.getCriacao().getTime()));
 
             statement.executeUpdate();
+
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public Produto buscarProduto(int id) {
+        Produto produto = null;
+
+        try {
+            connect();
+            Connection con = getConnection();
+
+            PreparedStatement statment = con.prepareStatement("SELECT * FROM Produto WHERE  id = ?");
+            statment.setInt(1, id);
+
+            ResultSet rs = statment.executeQuery();
+            if (rs.next()) {
+                produto = new Produto(rs.getString("nome"), rs.getString("descricao"));
+                produto.setId(rs.getInt("id"));
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return produto;
+    }
+
+    public Set<Produto> buscarProduto(String nome) {
+        Set<Produto> produtos = new TreeSet<Produto>();
+
+        try {
+            connect();
+            Connection con = getConnection();
+
+            PreparedStatement statment = con.prepareStatement("SELECT * FROM Produto WHERE  nome LIKE ?");
+            statment.setString(1, nome);
+
+            ResultSet rs = statment.executeQuery();
+            while (rs.next()) {
+                Produto produto = new Produto(rs.getString("nome"), rs.getString("descricao"));
+                produto.setId(rs.getInt("id"));
+
+                produtos.add(produto);
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return produtos;
     }
 
     public static ProdutoDAO getInstance() {

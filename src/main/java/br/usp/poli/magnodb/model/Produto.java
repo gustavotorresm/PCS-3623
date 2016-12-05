@@ -30,4 +30,8 @@ public class Produto {
     public Date getCriacao() {
         return criacao;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
