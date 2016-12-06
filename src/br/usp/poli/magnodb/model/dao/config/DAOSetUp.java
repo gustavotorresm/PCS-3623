@@ -1,5 +1,6 @@
 package br.usp.poli.magnodb.model.dao.config;
 
+import br.usp.poli.magnodb.model.dao.ClienteDAO;
 import br.usp.poli.magnodb.model.dao.ProdutoDAO;
 import br.usp.poli.magnodb.model.dao.context.LocalContext;
 import br.usp.poli.magnodb.model.dao.context.LocalContextFactory;
@@ -25,7 +26,7 @@ public final class DAOSetUp {
 
     private static void load(String env) throws IOException {
         Properties prop = new Properties();
-        prop.load(new FileInputStream("db.properties"));
+        prop.load(new FileInputStream("/home/mateus/Documents/PCS-3623/db.properties"));
 
         String driver = prop.getProperty(env + ".driver");
         String url = prop.getProperty(env + ".url");
@@ -39,6 +40,7 @@ public final class DAOSetUp {
 
     private static void setUp(String env) throws NamingException {
         ProdutoDAO.setUpDAO((DataSource) lc.lookup(env));
+        ClienteDAO.setUpDAO((DataSource) lc.lookup(env));
     }
 
     public static void testSetUp() {
