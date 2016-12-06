@@ -1,19 +1,26 @@
 package br.usp.poli.magnodb.controller;
 
 import br.usp.poli.magnodb.Main;
+import br.usp.poli.magnodb.model.Context;
 import br.usp.poli.magnodb.model.Usuario;
 import br.usp.poli.magnodb.model.dao.UsuarioDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Map;
 
-public class Controller {
+public class LoginController {
 
     @FXML
     ImageView logo;
@@ -50,6 +57,24 @@ public class Controller {
 
         boolean authorized = usuario.login(password);
 
-        System.out.println(authorized);
+        if (! authorized) {
+            System.out.println("Informações incorretas");
+            return;
+        }
+
+        Context.getInstance().setUsuario(usuario);
+
+        Node node = (Node) e.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/main.fxml"));
+            Scene scene = new Scene(root);
+
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
     }
 }

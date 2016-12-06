@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="root" styleClass="backgorund" stylesheets="@../css/start.css" xmlns="http://javafx.com/javafx/8.0.102-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.usp.poli.magnodb.controller.Controller">
+<BorderPane fx:id="root" styleClass="backgorund" stylesheets="@../css/start.css" xmlns="http://javafx.com/javafx/8.0.102-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.usp.poli.magnodb.controller.LoginController">
     <center>
       <GridPane>
          <BorderPane.margin>
@@ -25,7 +25,7 @@
          </BorderPane.margin>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="626.0" minWidth="10.0" prefWidth="195.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1174.0" minWidth="10.0" prefWidth="1174.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1174.0" minWidth="10.0" percentWidth="70.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
@@ -33,8 +33,8 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-             <TextField fx:id="usernameField" GridPane.columnIndex="1" onAction="#login"/>
-             <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1" onAction="#login" />
+             <TextField fx:id="usernameField" onAction="#login" GridPane.columnIndex="1" />
+             <PasswordField fx:id="passwordField" onAction="#login" GridPane.columnIndex="1" GridPane.rowIndex="1" />
              <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" />
                 <Button mnemonicParsing="false" onAction="#login" text="Button" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
              <Label alignment="CENTER_RIGHT" text="Usuário" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
