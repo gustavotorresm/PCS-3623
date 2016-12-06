@@ -10,7 +10,7 @@ public class Fisico extends Cliente {
     private String renda;
 
     public Fisico(String endereço, String nome, String email, String telefone, String cpf, String rg, String renda) {
-        super(endereço, nome, email, telefone);
+        
         this.cpf = cpf;
         this.rg = rg;
         this.renda = renda;

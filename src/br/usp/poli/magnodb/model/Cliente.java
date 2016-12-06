@@ -3,7 +3,7 @@ package br.usp.poli.magnodb.model;
 /**
  * Created by mateus on 06/12/16.
  */
-public class Cliente {
+public abstract class Cliente {
 
     private int id;
     private String endereço;
@@ -11,14 +11,6 @@ public class Cliente {
     private String email;
     private String telefone;
 
-    public Cliente() { }
-
-    public Cliente(String endereço, String nome, String email, String telefone) {
-        this.endereço = endereço;
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
-    }
 
     public String getEndereço() {
         return endereço;

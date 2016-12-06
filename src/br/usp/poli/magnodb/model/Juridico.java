@@ -10,7 +10,7 @@ public class Juridico extends Cliente {
     private String tipo;
 
     public Juridico(String endereço, String nome, String email, String telefone, String cnpj, String porte, String tipo) {
-        super(endereço, nome, email, telefone);
+
         this.cnpj = cnpj;
         this.porte = porte;
         this.tipo = tipo;
