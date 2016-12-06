@@ -1,7 +1,7 @@
 package br.usp.poli.magnodb.model;
 
 import java.util.Date;
-import usp.poli.magnodb.model.Produto;
+import br.usp.poli.magnodb.model.Produto;
 
 /**
  * Created by mateus on 06/12/16.

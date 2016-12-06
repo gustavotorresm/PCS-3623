@@ -21,7 +21,7 @@ public class ProdutoDAOTest {
     @Test
     public void cadastrarProduto() throws Exception {
         Produto p = new Produto("leite", "tem no melk.no");
-        DAOSetUp.testSetUp();;
+        DAOSetUp.testSetUp();
 
         ProdutoDAO dao = ProdutoDAO.getInstance();
         dao.cadastrarProduto(p);

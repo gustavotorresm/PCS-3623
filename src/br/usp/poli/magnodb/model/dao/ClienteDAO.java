@@ -47,11 +47,23 @@ public class ClienteDAO extends DBConnector {
             statement.executeUpdate();
 
             if(cliente instanceof Fisico) {
-                statement = con.prepareStatement("INSERT INTO Cliente " +
-                        "(endereco, nome, email, telefone) " +
-                        "VALUES (?, ?, ?, ?)");
+                statement = con.prepareStatement("INSERT INTO Fisico " +
+                        "(id, cpf, rg, renda) " +
+                        "VALUES (LAST_INSERT_ID(), ?, ?, ?)");
                 statement.setString(1, ((Fisico) cliente).getCpf());
+                statement.setString(2, ((Fisico) cliente).getRg());
+                statement.setString(3, ((Fisico) cliente).getRenda());
 
+                statement.executeUpdate();
+            } else if(cliente instanceof  Juridico) {
+                statement = con.prepareStatement("INSERT INTO Juridico " +
+                        "(id, cnpj, porte, tipo) " +
+                        "VALUES (LAST_INSERT_ID(), ?, ?, ?)");
+                statement.setString(1, ((Juridico) cliente).getCnpj());
+                statement.setString(2, ((Juridico) cliente).getPorte());
+                statement.setString(3, ((Juridico) cliente).getTipo());
+
+                statement.executeUpdate();
             }
 
             con.close();
@@ -81,7 +93,7 @@ public class ClienteDAO extends DBConnector {
                 statement.setInt(1, id);
 
                 rs = statement.executeQuery();
-                if(rs.next()) {
+                if (rs.next()) {
                     cliente = new Fisico(endereco, nome, email, telefone, rs.getString("cpf"), rs.getString("rg"), rs.getString("renda"));
                     cliente.setId(rs.getInt("id"));
                 } else {
@@ -89,7 +101,7 @@ public class ClienteDAO extends DBConnector {
                     statement.setInt(1, id);
 
                     rs = statement.executeQuery();
-                    if(rs.next()) {
+                    if (rs.next()) {
                         cliente = new Juridico(endereco, nome, email, telefone, rs.getString("cnpj"), rs.getString("porte"), rs.getString("tipo"));
                         cliente.setId(rs.getInt("id"));
                     }
@@ -103,4 +115,5 @@ public class ClienteDAO extends DBConnector {
 
         return cliente;
     }
+
 }
