@@ -72,7 +72,7 @@ public class ProdutoDAO extends DBConnector {
     }
 
     public Set<Produto> buscarProduto(String nome) {
-        Set<Produto> produtos = new TreeSet<Produto>();
+        Set<Produto> produtos = new TreeSet<>();
 
         try {
             connect();
