@@ -13,6 +13,7 @@ public final class LocalContextFactory {
             NamingManager.setInitialContextFactoryBuilder(lc);
             return lc;
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException(e.getMessage());
         }
 

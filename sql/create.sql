@@ -1,4 +1,4 @@
-CREATE TABLE `Cliente` (
+CREATE TABLE IF NOT EXISTS `Cliente` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `endereco` VARCHAR(45) NOT NULL,
   `nome` VARCHAR(45) NOT NULL,
@@ -7,7 +7,7 @@ CREATE TABLE `Cliente` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC));
 
-CREATE TABLE `Fisico` (
+CREATE TABLE IF NOT EXISTS `Fisico` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `cpf` VARCHAR(45) NOT NULL,
   `rg` VARCHAR(45) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE `Fisico` (
   CONSTRAINT `id`
   FOREIGN KEY (`id`) REFERENCES `Cliente` (`id`));
 
-CREATE TABLE `Juridico` (
+CREATE TABLE IF NOT EXISTS `Juridico` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `cnpj` VARCHAR(45) NOT NULL,
   `porte` VARCHAR(45) NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE `Juridico` (
   CONSTRAINT `idjuridico`
   FOREIGN KEY (`id`)  REFERENCES `Cliente` (`id`));
 
-CREATE TABLE `Entrega` (
+CREATE TABLE IF NOT EXISTS `Entrega` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `endereco` VARCHAR(45) NOT NULL,
   `frete` FLOAT NOT NULL,
@@ -34,12 +34,12 @@ CREATE TABLE `Entrega` (
   PRIMARY KEY (`id`),
   CONSTRAINT C1 CHECK(data_recepcao > data_despache));
 
-CREATE TABLE `Pedido` (
+CREATE TABLE IF NOT EXISTS `Pedido` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `data` DATETIME NOT NULL,
   PRIMARY KEY (`id`));
 
-CREATE TABLE `Venda` (
+CREATE TABLE IF NOT EXISTS `Venda` (
   cliente INT NOT NULL,
   entrega INT NOT NULL,
   pedido INT NOT NULL,
@@ -57,14 +57,14 @@ CREATE TABLE `Venda` (
   FOREIGN KEY (entrega)
   REFERENCES `Pedido` (`id`));
 
-CREATE TABLE `Produto` (
+CREATE TABLE IF NOT EXISTS `Produto` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(255) NOT NULL,
   `descricao` VARCHAR(255) NOT NULL,
   `data_criacao` DATETIME NOT NULL,
   PRIMARY KEY (`id`));
 
-CREATE TABLE `Item` (
+CREATE TABLE IF NOT EXISTS `Item` (
   produto INT NOT NULL,
   `pedido` INT NOT NULL,
   `id` INT NOT NULL,
@@ -78,7 +78,7 @@ CREATE TABLE `Item` (
   FOREIGN KEY (pedido)
   REFERENCES `Pedido` (`id`));
 
-CREATE TABLE `Preco` (
+CREATE TABLE IF NOT EXISTS `Preco` (
   produto INT NOT NULL AUTO_INCREMENT,
   `id` INT NOT NULL,
   `preco` FLOAT NOT NULL,
@@ -87,3 +87,13 @@ CREATE TABLE `Preco` (
   CONSTRAINT `idprodutopreco`
   FOREIGN KEY (produto)
   REFERENCES `Produto` (`id`));
+
+CREATE TABLE IF NOT EXISTS Usuario
+(
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  username VARCHAR(64) NOT NULL UNIQUE ,
+  password BINARY(32) NOT NULL,
+  salt BINARY(32) NOT NULL,
+  root BOOLEAN NOT NULL DEFAULT FALSE
+);
+CREATE UNIQUE INDEX Usuario_usuario_uindex ON Usuario (usuario);

@@ -33,10 +33,10 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-               <TextField GridPane.columnIndex="1" />
-            <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" />
-          <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+             <TextField fx:id="usernameField" GridPane.columnIndex="1" onAction="#login"/>
+             <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1" onAction="#login" />
+             <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                <Button mnemonicParsing="false" onAction="#login" text="Button" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
              <Label alignment="CENTER_RIGHT" text="Usuário" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
                <GridPane.margin>
                   <Insets right="15.0" />
@@ -55,7 +55,7 @@
       </GridPane>
     </center>
    <top>
-      <StackPane maxHeight="300.0" minWidth="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <StackPane maxHeight="100.0" minWidth="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView id="logo" fx:id="logo" onMouseClicked="#logoInfo">
                 <image>
