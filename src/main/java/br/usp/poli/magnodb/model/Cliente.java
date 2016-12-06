@@ -11,10 +11,13 @@ public class Cliente {
     private String email;
     private String telefone;
 
-    public Cliente(String endereço, String nome, String email) {
+    public Cliente() { }
+
+    public Cliente(String endereço, String nome, String email, String telefone) {
         this.endereço = endereço;
         this.nome = nome;
         this.email = email;
+        this.telefone = telefone;
     }
 
     public String getEndereço() {

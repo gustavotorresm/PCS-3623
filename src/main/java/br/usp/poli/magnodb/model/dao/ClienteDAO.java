@@ -1,7 +1,6 @@
 package br.usp.poli.magnodb.model.dao;
 
 import br.usp.poli.magnodb.model.Cliente;
-import br.usp.poli.magnodb.model.Produto;
 
 import javax.sql.DataSource;
 import javax.naming.NamingException;
@@ -14,14 +13,9 @@ public class ClienteDAO extends DBConnector {
 
     private static ClienteDAO instance;
 
-    private static void setUpDAO(DataSource dataSource) {
+    public static void setUpDAO(DataSource dataSource) {
         instance = new ClienteDAO(dataSource);
     }
-
-    public static ClienteDAO getInstance() {
-        return instance;
-    }
-
 
     private ClienteDAO(DataSource dataSource) {
         try {
@@ -29,6 +23,10 @@ public class ClienteDAO extends DBConnector {
         } catch (NamingException e) {
             e.printStackTrace();
         }
+    }
+
+    public static ClienteDAO getInstance() {
+        return instance;
     }
 
     public void cadastrarCliente(Cliente cliente) {
@@ -65,7 +63,7 @@ public class ClienteDAO extends DBConnector {
 
             ResultSet rs = statment.executeQuery();
             if (rs.next()) {
-                cliente = new Cliente(rs.getString("endereco"), rs.getString("nome"), rs.getString("email"));
+                cliente = new Cliente(rs.getString("endereco"), rs.getString("nome"), rs.getString("email"), rs.getString("telefone"));
                 cliente.setId(rs.getInt("id"));
             }
 
@@ -75,6 +73,5 @@ public class ClienteDAO extends DBConnector {
         }
 
         return cliente;
-
     }
 }
