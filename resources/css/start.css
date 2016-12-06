@@ -1,0 +1,10 @@
+#root {
+    -fx-background-image: url("../img/background.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: stretch;
+}
+
+.button {
+    -fx-border-color: gold;
+    -fx-background-color: burlywood;
+}

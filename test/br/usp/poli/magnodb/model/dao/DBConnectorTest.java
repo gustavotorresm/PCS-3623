@@ -1,9 +1,6 @@
 package br.usp.poli.magnodb.model.dao;
 
-import br.usp.poli.magnodb.model.dao.context.LocalContext;
-import br.usp.poli.magnodb.model.dao.context.LocalContextFactory;
-
-import java.util.Properties;
+import br.usp.poli.magnodb.model.dao.DBConnector;
 
 public class DBConnectorTest {
     @org.junit.Test

@@ -8,10 +8,10 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.layout.AnchorPane?>
-<BorderPane fx:controller="sample.Controller" xmlns:fx="http://javafx.com/fxml">
+<BorderPane fx:controller="br.usp.poli.magnodb.controller.Controller" xmlns:fx="http://javafx.com/fxml">
     <padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
     <center>
-        <AnchorPane BorderPane.alignment="CENTER">
+        <AnchorPane BorderPane.alignment="CENTER" onMouseClicked="#logoInfo">
             <Button alignment="BOTTOM_CENTER" AnchorPane.bottomAnchor="0">
                 <font>
                     <Font size="32" name="Times New Roman" />
