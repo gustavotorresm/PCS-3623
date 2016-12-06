@@ -1,7 +1,6 @@
 package br.usp.poli.magnodb.model.dao;
 
 import br.usp.poli.magnodb.model.Cliente;
-import br.usp.poli.magnodb.model.Produto;
 import br.usp.poli.magnodb.model.dao.config.DAOSetUp;
 import org.junit.After;
 import org.junit.Before;
@@ -23,10 +22,6 @@ public class ClienteDAOTest {
 
     @Test
     public void cadastrarCliente() throws Exception {
-        Cliente c = new Cliente("Rua das flores", "Cláudio", "claudio@ime.usp.br", "1111-1111");
-        DAOSetUp.testSetUp();;
 
-        ClienteDAO dao = ClienteDAO.getInstance();
-        dao.cadastrarCliente(c);
     }
 }

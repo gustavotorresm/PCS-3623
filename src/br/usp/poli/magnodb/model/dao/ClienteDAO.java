@@ -1,6 +1,8 @@
 package br.usp.poli.magnodb.model.dao;
 
 import br.usp.poli.magnodb.model.Cliente;
+import br.usp.poli.magnodb.model.Fisico;
+import br.usp.poli.magnodb.model.Juridico;
 
 import javax.sql.DataSource;
 import javax.naming.NamingException;
@@ -21,7 +23,7 @@ public class ClienteDAO extends DBConnector {
         try {
             create(dataSource);
         } catch (NamingException e) {
-            e.printStackTrace();
+             e.printStackTrace();
         }
     }
 
@@ -44,6 +46,14 @@ public class ClienteDAO extends DBConnector {
 
             statement.executeUpdate();
 
+            if(cliente instanceof Fisico) {
+                statement = con.prepareStatement("INSERT INTO Cliente " +
+                        "(endereco, nome, email, telefone) " +
+                        "VALUES (?, ?, ?, ?)");
+                statement.setString(1, ((Fisico) cliente).getCpf());
+
+            }
+
             con.close();
 
         } catch (SQLException e) {
@@ -58,13 +68,32 @@ public class ClienteDAO extends DBConnector {
             connect();
             Connection con = getConnection();
 
-            PreparedStatement statment = con.prepareStatement("SELECT * FROM Cliente WHERE  id = ?");
-            statment.setInt(1, id);
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM Cliente WHERE  id = ?");
+            statement.setInt(1, id);
 
-            ResultSet rs = statment.executeQuery();
+            ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-                cliente = new Cliente(rs.getString("endereco"), rs.getString("nome"), rs.getString("email"), rs.getString("telefone"));
-                cliente.setId(rs.getInt("id"));
+                String endereco = rs.getString("endereco");
+                String nome = rs.getString("nome");
+                String email = rs.getString("email");
+                String telefone = rs.getString("telefone");
+                statement = con.prepareStatement("SELECT * FROM Fisico WHERE id = ?");
+                statement.setInt(1, id);
+
+                rs = statement.executeQuery();
+                if(rs.next()) {
+                    cliente = new Fisico(endereco, nome, email, telefone, rs.getString("cpf"), rs.getString("rg"), rs.getString("renda"));
+                    cliente.setId(rs.getInt("id"));
+                } else {
+                    statement = con.prepareStatement("SELECT * FROM Juridico WHERE id = ?");
+                    statement.setInt(1, id);
+
+                    rs = statement.executeQuery();
+                    if(rs.next()) {
+                        cliente = new Juridico(endereco, nome, email, telefone, rs.getString("cnpj"), rs.getString("porte"), rs.getString("tipo"));
+                        cliente.setId(rs.getInt("id"));
+                    }
+                }
             }
 
             con.close();
