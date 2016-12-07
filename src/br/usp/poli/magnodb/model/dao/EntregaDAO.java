@@ -5,7 +5,6 @@ import br.usp.poli.magnodb.model.*;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 

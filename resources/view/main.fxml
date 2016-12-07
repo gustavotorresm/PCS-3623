@@ -13,22 +13,20 @@
          <children>
             <MenuBar layoutX="-3.0" prefHeight="29.0" prefWidth="600.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
               <menus>
-                <Menu mnemonicParsing="false" text="Produto">
+                <Menu mnemonicParsing="false" text="Clientes">
                   <items>
-                    <MenuItem mnemonicParsing="false" onAction="#buscarProduto" text="Buscar" />
-                        <MenuItem mnemonicParsing="false" text="Cadastrar" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Venda">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
+                    <MenuItem mnemonicParsing="false" text="Buscar" />
+                    <MenuItem mnemonicParsing="false" text="Cadastrar" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Entrega">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Estatísticas" onAction="#estatisticaEntrega" />
-                  </items>
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Estatísticas" onAction="#estatisticaEntrega" />
+                    </items>
                 </Menu>
+                <Menu mnemonicParsing="false" text="Pedidos">
+                </Menu>
+
                   <Menu mnemonicParsing="false" text="Cliente">
                     <items>
                       <MenuItem mnemonicParsing="false" text="Action 1" />
