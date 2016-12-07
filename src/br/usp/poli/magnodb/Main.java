@@ -23,7 +23,7 @@ public class Main extends Application{
         Parent root = FXMLLoader.load(getClass().getResource("/view/login.fxml"));
 
         primaryStage.setTitle("MagnoDB");
-        primaryStage.setScene(new Scene(root, 800, 450));
+        primaryStage.setScene(new Scene(root, 800, 600));
 
         primaryStage.show();
     }

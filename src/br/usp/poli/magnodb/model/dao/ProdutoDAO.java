@@ -5,6 +5,8 @@ import br.usp.poli.magnodb.model.Produto;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -101,4 +103,28 @@ public class ProdutoDAO extends DBConnector {
         return instance;
     }
 
+    public List<Produto> listarProdutos() {
+        List<Produto> produtos = new LinkedList<>();
+
+        try {
+            connect();
+            Connection con = getConnection();
+
+            PreparedStatement statment = con.prepareStatement("SELECT * FROM Produto");
+
+            ResultSet rs = statment.executeQuery();
+            while (rs.next()) {
+                Produto produto = new Produto(rs.getString("nome"), rs.getString("descricao"));
+                produto.setId(rs.getInt("id"));
+
+                produtos.add(produto);
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return produtos;
+    }
 }

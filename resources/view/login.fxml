@@ -19,7 +19,7 @@
 
 <BorderPane fx:id="root" styleClass="backgorund" stylesheets="@../css/start.css" xmlns="http://javafx.com/javafx/8.0.102-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.usp.poli.magnodb.controller.LoginController">
     <center>
-      <GridPane>
+      <GridPane minHeight="100.0">
          <BorderPane.margin>
             <Insets bottom="50.0" left="20.0" right="20.0" top="100.0" />
          </BorderPane.margin>
@@ -57,7 +57,7 @@
    <top>
       <StackPane maxHeight="100.0" minWidth="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView id="logo" fx:id="logo" onMouseClicked="#logoInfo">
+            <ImageView id="logo" fx:id="logo" fitHeight="270.0" fitWidth="1045.0" onMouseClicked="#logoInfo">
                 <image>
                     <Image url="@/img/cover.jpeg" />
                 </image>
