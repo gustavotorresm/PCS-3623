@@ -26,7 +26,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Entrega">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
+                    <MenuItem mnemonicParsing="false" text="Estatísticas" onAction="#estatisticaEntrega" />
                   </items>
                 </Menu>
                   <Menu mnemonicParsing="false" text="Cliente">

@@ -50,4 +50,17 @@ public class MainController {
             e1.printStackTrace();
         }
     }
+
+    public void estatisticaEntrega(ActionEvent e) {
+        try {
+            Parent root = (GridPane) FXMLLoader.load(getClass().getResource("/view/entrega/estatistica.fxml"));
+            content.getChildren().clear();
+
+            content.getChildren().add(root);
+            root.prefHeight(content.getHeight());
+
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
 }

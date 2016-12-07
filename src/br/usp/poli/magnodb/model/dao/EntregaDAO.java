@@ -105,4 +105,55 @@ public class EntregaDAO extends DBConnector {
 
         return entregas ;
     }
+
+    public float calcularTempoMedio() {
+        float tempoMedio = -1;
+        try {
+            connect();
+            Connection con = getConnection();
+
+            PreparedStatement statement = con.prepareStatement("SELECT AVG(DATEDIFF(data_recepcao,data_despache)) AS tempo_medio FROM Entrega");
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()) {
+                tempoMedio = rs.getFloat("tempo_medio");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tempoMedio;
+    }
+
+    public int calcularNumeroEntregasRecebidas() {
+        int numeroEntregasRecebidas = -1;
+        try {
+            connect();
+            Connection con = getConnection();
+
+            PreparedStatement statement = con.prepareStatement("SELECT COUNT(*) AS numeroEntregasRecebidas FROM Entrega WHERE data_recepcao < CURDATE()");
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()) {
+                numeroEntregasRecebidas = rs.getInt("numeroEntregasRecebidas");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return numeroEntregasRecebidas;
+    }
+
+    public float calcularMediaFrete() {
+        float mediaFrete = -1;
+        try {
+            connect();
+            Connection con = getConnection();
+
+            PreparedStatement statement = con.prepareStatement("SELECT AVG(frete) AS mediaFrete FROM Entrega ");
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()) {
+                mediaFrete = rs.getInt("mediaFrete");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return mediaFrete;
+    }
 }
