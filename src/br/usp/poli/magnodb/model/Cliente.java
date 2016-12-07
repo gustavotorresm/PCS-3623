@@ -31,4 +31,24 @@ public abstract class Cliente {
     public String getEmail() {
         return email;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    protected void setEndereço(String endereço) {
+        this.endereço = endereço;
+    }
+
+    protected void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    protected void setEmail(String email) {
+        this.email = email;
+    }
+
+    protected void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 }

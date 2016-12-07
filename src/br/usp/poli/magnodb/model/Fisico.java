@@ -11,6 +11,10 @@ public class Fisico extends Cliente {
 
     public Fisico(String endereço, String nome, String email, String telefone, String cpf, String rg, String renda) {
 
+        super.setEndereço(endereço);
+        super.setNome(nome);
+        super.setEmail(email);
+        super.setTelefone(telefone);
         this.cpf = cpf;
         this.rg = rg;
         this.renda = renda;
