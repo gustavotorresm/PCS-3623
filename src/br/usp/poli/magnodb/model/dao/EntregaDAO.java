@@ -1,16 +1,11 @@
 package br.usp.poli.magnodb.model.dao;
 
-import br.usp.poli.magnodb.model.Cliente;
-import br.usp.poli.magnodb.model.Entrega;
-import br.usp.poli.magnodb.model.Fisico;
-import br.usp.poli.magnodb.model.Juridico;
+import br.usp.poli.magnodb.model.*;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.Date;
 
 /**
  * Created by mateus on 06/12/16.
@@ -44,8 +39,8 @@ public class EntregaDAO extends DBConnector {
                     "VALUES (?, ?, ?, ?)");
             statement.setString(1, entrega.getEndereco());
             statement.setFloat(2, entrega.getFrete());
-            statement.setDate(3, new Date(entrega.getDataDespache().getTime()));
-            statement.setDate(4, new Date(entrega.getDataRecepcao().getTime()));
+            statement.setDate(3, new java.sql.Date(entrega.getDataDespache().getTime()));
+            statement.setDate(4, new java.sql.Date(entrega.getDataRecepcao().getTime()));
 
             statement.executeUpdate();
 
@@ -57,4 +52,29 @@ public class EntregaDAO extends DBConnector {
     }
 
 
+    public Entrega buscarEntrega(int id) {
+        Entrega entrega = null;
+
+        try {
+            connect();
+            Connection con = getConnection();
+
+            PreparedStatement statment = con.prepareStatement("SELECT * FROM Entrega WHERE  id = ?");
+            statment.setInt(1, id);
+
+            ResultSet rs = statment.executeQuery();
+            if (rs.next()) {
+                entrega = new Entrega(rs.getString("endereco"), rs.getFloat("frete"),
+                          rs.getTimestamp("data_despache"),
+                          rs.getTimestamp("data_recepcao"));
+                entrega.setId(rs.getInt("id"));
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return entrega;
+    }
 }

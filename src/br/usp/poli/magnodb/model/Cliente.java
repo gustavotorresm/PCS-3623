@@ -31,4 +31,8 @@ public abstract class Cliente {
     public String getEmail() {
         return email;
     }
+
+    public int getId() {
+        return id;
+    }
 }
