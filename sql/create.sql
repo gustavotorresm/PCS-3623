@@ -80,10 +80,9 @@ CREATE TABLE IF NOT EXISTS `Item` (
 
 CREATE TABLE IF NOT EXISTS `Preco` (
   produto INT NOT NULL AUTO_INCREMENT,
-  `id` INT NOT NULL,
   `preco` FLOAT NOT NULL,
   `data` DATETIME NOT NULL,
-  PRIMARY KEY (produto, `id`),
+  PRIMARY KEY (produto, `data`),
   CONSTRAINT `idprodutopreco`
   FOREIGN KEY (produto)
   REFERENCES `Produto` (`id`));
