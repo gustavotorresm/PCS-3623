@@ -57,4 +57,28 @@ public class PedidoDAO extends DBConnector {
 
         return pedidos;
     }
+
+    public Pedido buscarPedido(int id) {
+        Pedido pedido = null;
+
+        try {
+            connect();
+            Connection con = getConnection();
+
+            PreparedStatement statment = con.prepareStatement("SELECT * FROM Pedido WHERE id = ?");
+            statment.setInt(1, id);
+
+            ResultSet rs = statment.executeQuery();
+            if (rs.next()) {
+                pedido = new Pedido(rs.getTimestamp("data"));
+                pedido.setId(rs.getInt("id"));
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return pedido;
+    }
 }
