@@ -6,6 +6,8 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by mateus on 06/12/16.
@@ -76,5 +78,31 @@ public class EntregaDAO extends DBConnector {
         }
 
         return entrega;
+    }
+
+    public List<Entrega> listarEntregas() {
+        List<Entrega> entregas = new LinkedList<>();
+
+        try {
+            connect();
+            Connection con = getConnection();
+
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM Entrega");
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Entrega entrega  = new Entrega(rs.getString("endereco"), rs.getFloat("frete"),
+                        rs.getTimestamp("data_despache"), rs.getTimestamp("data_recepcao"));
+                entrega .setId(rs.getInt("id"));
+
+                entregas.add(entrega);
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return entregas ;
     }
 }
