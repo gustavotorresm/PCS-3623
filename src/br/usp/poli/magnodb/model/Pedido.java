@@ -20,4 +20,9 @@ public class Pedido {
     public Date getData() {
         return data;
     }
+
+	public int getId() {
+		return this.id;
+	}
+
 }

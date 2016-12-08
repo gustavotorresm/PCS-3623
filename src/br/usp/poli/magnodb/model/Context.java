@@ -12,6 +12,7 @@ public class Context {
     private Stage stage;
     private Produto produto;
     private List<Entrega> entregas;
+    private Pedido pedido;
 
     private static Context ourInstance = new Context();
 
@@ -61,4 +62,13 @@ public class Context {
     public void setEntregas(List<Entrega> entregas) {
         this.entregas = entregas;
     }
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+		
+	}
+
+	public Pedido getPedido() {
+		return this.pedido;
+	}
 }

@@ -87,7 +87,11 @@ public class ProdutoListaController {
 
         precoSlider.setShowTickLabels(true);
 
-        precoSlider.setMajorTickUnit((maxPreco - minPreco) / 5);
+        if (((maxPreco - minPreco) / 5) <= 0) {
+        	precoSlider.setMajorTickUnit(0.1);
+        } else {
+        	precoSlider.setMajorTickUnit((maxPreco - minPreco) / 5);
+        }
 
         precoSlider.setHighValue(maxPreco);
         precoSlider.setLowValue(minPreco);
@@ -99,9 +103,13 @@ public class ProdutoListaController {
         quantidadeSlider.setMin(minQuantidade);
 
         quantidadeSlider.setShowTickLabels(true);
-
-        quantidadeSlider.setMajorTickUnit((maxQuantidade - minQuantidade) / 5d);
-
+        
+        if ((maxQuantidade - minQuantidade) / 5d <= 0) {
+        	quantidadeSlider.setMajorTickUnit(0.1);
+        } else {
+        	quantidadeSlider.setMajorTickUnit((maxQuantidade - minQuantidade) / 5d);
+        }
+        	
         quantidadeSlider.setHighValue(maxQuantidade);
         quantidadeSlider.setLowValue(minQuantidade);
 
@@ -113,7 +121,11 @@ public class ProdutoListaController {
 
         ultimaVendaSlider.setShowTickLabels(true);
 
-        ultimaVendaSlider.setMajorTickUnit((maxUltimoVendido.getTime() - minUltimoVendido.getTime()) / 3d);
+        if (((maxUltimoVendido.getTime() - minUltimoVendido.getTime()) / 3d) <= 0) {
+        	ultimaVendaSlider.setMajorTickUnit(0.1);
+        } else {
+        	ultimaVendaSlider.setMajorTickUnit((maxUltimoVendido.getTime() - minUltimoVendido.getTime()) / 3d);
+        }
 
         ultimaVendaSlider.setHighValue(maxUltimoVendido.getTime());
         ultimaVendaSlider.setLowValue(minUltimoVendido.getTime());

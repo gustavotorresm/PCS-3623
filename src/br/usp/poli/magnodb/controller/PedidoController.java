@@ -1,81 +1,51 @@
 package br.usp.poli.magnodb.controller;
 
-import java.io.IOException;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Optional;
 
 import br.usp.poli.magnodb.model.Context;
-import br.usp.poli.magnodb.model.Usuario;
-import br.usp.poli.magnodb.model.dao.UsuarioDAO;
+import br.usp.poli.magnodb.model.Pedido;
+import br.usp.poli.magnodb.model.Produto;
+import br.usp.poli.magnodb.model.dao.PedidoDAO;
+import br.usp.poli.magnodb.model.dao.ProdutoDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextInputDialog;
 
 public class PedidoController {
 
+	@FXML
+    Label idField;
+	
     @FXML
-    Label intropedidos;
+    Label dataField;
+    
+    @FXML
+    Label clienteField;
+    
+    @FXML
+    Label entregaField;
 
-    @FXML
-    BorderPane root;
+    private Pedido pedido;
 
-    @FXML
-    TextField usernameField;
-
-    @FXML
-    PasswordField passwordField;
+    public PedidoController() {
+        pedido = Context.getInstance().getPedido();
+    }
 
     @FXML
     public void initialize() {
-    	intropedidos.setText("Buscar um pedido");
-    }
-
-    public PedidoController() {
-    	
-    }
-    
-    public void login(ActionEvent e) {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-
-        UsuarioDAO dao = UsuarioDAO.getInstance();
-
-        Usuario usuario = dao.buscarUsuario(username);
-
-        if (usuario == null) {
-            System.out.println("Usuário não existe");
-            return;
-        }
-
-        boolean authorized = usuario.login(password);
-
-        if (! authorized) {
-            System.out.println("Informações incorretas");
-            return;
-        }
-
-        Context.getInstance().setUsuario(usuario);
-
-        Node node = (Node) e.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/main.fxml"));
-            Scene scene = new Scene(root);
-
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
+        dataField.setText("Data do pedido: " + pedido.getData().toString());
+        
+        PedidoDAO dao = PedidoDAO.getInstance();
+        clienteField.setText("Cliente: " + dao.buscarCliente(pedido.getId()));
+        
+        idField.setText("ID do pedido" + String.valueOf(pedido.getId()));
     }
 }
