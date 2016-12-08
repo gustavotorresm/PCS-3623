@@ -3,11 +3,14 @@ package br.usp.poli.magnodb.model;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 public class Context {
 
     private Usuario usuario;
     private AnchorPane contentPane;
     private Stage stage;
+    private List<Entrega> entregas;
 
     private static Context ourInstance = new Context();
 
@@ -40,5 +43,13 @@ public class Context {
 
     public Stage getStage() {
         return stage;
+    }
+
+    public List<Entrega> getEntregas() {
+        return entregas;
+    }
+
+    public void setEntregas(List<Entrega> entregas) {
+        this.entregas = entregas;
     }
 }

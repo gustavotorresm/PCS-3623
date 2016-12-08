@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<ScrollPane fx:controller="br.usp.poli.magnodb.controller.EntregaListaController" xmlns="http://javafx.com/javafx/8.0.102-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <content>
+        <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+            <center>
+                <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" fx:id="tabela">
+                    <columns>
+                        <TableColumn prefWidth="75.0" text="id">
+                            <cellValueFactory><PropertyValueFactory property="id" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn prefWidth="75.0" text="endereco">
+                            <cellValueFactory><PropertyValueFactory property="endereco" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn prefWidth="75.0" text="frete">
+                            <cellValueFactory><PropertyValueFactory property="frete" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn prefWidth="75.0" text="dataDespache">
+                            <cellValueFactory><PropertyValueFactory property="dataDespache" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn prefWidth="75.0" text="dataRecepcao">
+                            <cellValueFactory><PropertyValueFactory property="dataRecepcao" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <!--<TableColumn prefWidth="171.0" text="descrição" />
+                        <TableColumn prefWidth="75.0" text="preço" />
+                        <TableColumn prefWidth="75.0" text="criação" />-->
+                    </columns>
+                </TableView>
+            </center>
+        </BorderPane>
+    </content>
+</ScrollPane>

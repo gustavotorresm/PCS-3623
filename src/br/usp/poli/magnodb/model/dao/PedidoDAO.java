@@ -1,7 +1,6 @@
 package br.usp.poli.magnodb.model.dao;
 
 import br.usp.poli.magnodb.model.Pedido;
-import br.usp.poli.magnodb.model.Produto;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;

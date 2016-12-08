@@ -17,14 +17,4 @@ public class ProdutoDAOTest {
     public void tearDown() throws Exception {
 
     }
-
-    @Test
-    public void cadastrarProduto() throws Exception {
-        Produto p = new Produto("leite", "tem no melk.no");
-        DAOSetUp.testSetUp();
-
-        ProdutoDAO dao = ProdutoDAO.getInstance();
-        dao.cadastrarProduto(p);
-    }
-
 }
