@@ -26,29 +26,21 @@ import javafx.stage.Stage;
 public class PedidoBuscaController {
 
     @FXML
-    Label intropedidos;
-
-    @FXML
-    BorderPane root;
-
-    @FXML
     TextField idField;
 
     @FXML
     public void initialize() {
-    	intropedidos.setText("Buscar um pedido");
     }
 
     public PedidoBuscaController() {
-    	
     }
     
-    public void login(ActionEvent e) {
-        String id = idField.getText();
+    public void buscar(ActionEvent e) {
+        int id = Integer.valueOf(idField.getText().trim());
 
-        PedidoDAO dao = PedidoDAO.getInstance();
-
-        Pedido pedido = dao.buscarPedido(Integer.parseInt(id));
+        PedidoDAO pdao = PedidoDAO.getInstance();
+        Pedido pedido = null;
+        pedido = pdao.buscarPedido(id);
 
         if (pedido == null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
