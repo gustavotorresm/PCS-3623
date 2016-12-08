@@ -155,4 +155,29 @@ public class EntregaDAO extends DBConnector {
         }
         return mediaFrete;
     }
+
+    public List<Entrega> buscarPorCliente(String nome) {
+        List<Entrega> entregas = new LinkedList<>();
+        try {
+            connect();
+            Connection con = getConnection();
+
+            PreparedStatement statement = con.prepareStatement("SELECT Entrega.* FROM Venda " +
+                    "INNER JOIN Cliente ON Venda.cliente = Cliente.id " +
+                    "INNER JOIN Entrega ON Venda.entrega = Entrega.id " +
+                    "WHERE Cliente.nome = ?");
+            statement.setString(1, nome);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                Entrega entrega  = new Entrega(rs.getString("endereco"), rs.getFloat("frete"),
+                        rs.getTimestamp("data_despache"), rs.getTimestamp("data_recepcao"));
+                entrega .setId(rs.getInt("id"));
+
+                entregas.add(entrega);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return entregas;
+    }
 }

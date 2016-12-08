@@ -39,4 +39,9 @@ public class Entrega {
     public Date getDataRecepcao() {
         return dataRecepcao;
     }
+
+    public int getId() {
+        return id;
+    }
+
 }

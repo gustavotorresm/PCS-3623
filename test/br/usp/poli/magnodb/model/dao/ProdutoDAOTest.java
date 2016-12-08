@@ -25,5 +25,4 @@ public class ProdutoDAOTest {
         ProdutoDAO dao = ProdutoDAO.getInstance();
         dao.cadastrarProduto(p);
     }
-
 }

@@ -16,6 +16,5 @@ public final class LocalContextFactory {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());
         }
-
     }
 }

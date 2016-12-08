@@ -23,6 +23,9 @@
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#estatisticaEntrega" text="Estatísticas" />
                     </items>
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Pesquisar" onAction="#pesquisarEntrega" />
+                    </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Pedidos">
                      <items>
