@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.102-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.usp.poli.magnodb.controller.ProdutoController">
+<GridPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.102-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.usp.poli.magnodb.controller.ProdutoBuscaController">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="119.0" minWidth="10.0" prefWidth="119.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.0" minWidth="10.0" prefWidth="76.0" />
@@ -67,7 +67,7 @@
       </StackPane>
       <DialogPane GridPane.columnIndex="2" GridPane.rowIndex="2">
          <content>
-            <Button fx:id="buscar" mnemonicParsing="false" text="Buscar" />
+            <Button fx:id="buscar" mnemonicParsing="false" onAction="#buscar" text="Buscar" />
          </content>
       </DialogPane>
       <DialogPane GridPane.columnIndex="2" GridPane.rowIndex="3">

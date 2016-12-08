@@ -2,7 +2,7 @@ package br.usp.poli.magnodb.model;
 
 import java.util.Date;
 
-public class Produto {
+public class Produto implements Comparable {
 
     private String nome, descricao;
     private Date criacao;
@@ -67,5 +67,15 @@ public class Produto {
 
     public void setQuantidadeVendida(int quantidadeVendida) {
         this.quantidadeVendida = quantidadeVendida;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return hashCode() - o.hashCode();
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
     }
 }
