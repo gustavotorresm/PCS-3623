@@ -54,4 +54,8 @@ public class Venda {
     public void setEntrega(Entrega entrega) {
         this.entrega = entrega;
     }
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
 }

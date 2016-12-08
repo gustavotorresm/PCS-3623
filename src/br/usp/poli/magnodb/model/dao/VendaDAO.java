@@ -8,6 +8,7 @@ import br.usp.poli.magnodb.model.Venda;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
+import java.time.Instant;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -70,9 +71,9 @@ public class VendaDAO extends DBConnector {
             statement.setInt(1, venda.getCliente().getId());
             statement.setInt(2, venda.getEntrega().getId());
             statement.setInt(3, venda.getPedido().getId());
-            statement.setTimestamp(4, new Timestamp(venda.getDataPagamento().getTime()));
+            statement.setTimestamp(4, new Timestamp(Instant.now().toEpochMilli()));
             statement.setFloat(5, venda.getDesconto());
-            statement.setString(6, venda.getNotaFiscal());
+            statement.setString(6, "666");
 
             statement.executeUpdate();
 

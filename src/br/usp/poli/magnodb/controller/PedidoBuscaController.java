@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -38,9 +39,7 @@ public class PedidoBuscaController {
     public void buscar(ActionEvent e) {
         int id = Integer.valueOf(idField.getText().trim());
 
-        PedidoDAO pdao = PedidoDAO.getInstance();
-        Pedido pedido = null;
-        pedido = pdao.buscarPedido(id);
+        Pedido pedido = PedidoDAO.getInstance().buscarPedido(id);
 
         if (pedido == null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -55,11 +54,12 @@ public class PedidoBuscaController {
         Stage stage = (Stage) node.getScene().getWindow();
         Context.getInstance().setPedido(pedido);
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/pedido/main.fxml"));
-            Scene scene = new Scene(root);
+            Parent root = (GridPane) FXMLLoader.load(getClass().getResource("/view/pedido/main.fxml"));
+            Context.getInstance().getContentPane().getChildren().clear();
 
-            stage.setScene(scene);
-            stage.show();
+            Context.getInstance().getContentPane().getChildren().add(root);
+            root.prefHeight(Context.getInstance().getContentPane().getHeight());
+
         } catch (IOException e1) {
             e1.printStackTrace();
         }

@@ -60,6 +60,7 @@ public class cadastrarVendaEntregaController {
         Pedido pedido = Context.getInstance().getPedido();
         id = PedidoDAO.getInstance().cadastrarPedido(pedido);
         pedido.setId(id);
+       
 
         List<Item> itens = Context.getInstance().getItens();
         for (Item item : itens) {
@@ -71,6 +72,7 @@ public class cadastrarVendaEntregaController {
         Cliente cliente = Context.getInstance().getCliente();
         venda.setCliente(cliente);
         venda.setEntrega(entrega);
+        venda.setPedido(pedido);
 
         VendaDAO.getInstance().cadastrarVenda(venda);
 

@@ -13,12 +13,6 @@
          <children>
             <MenuBar layoutX="-3.0" prefHeight="29.0" prefWidth="600.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
               <menus>
-                <Menu mnemonicParsing="false" text="Clientes">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Buscar" />
-                    <MenuItem mnemonicParsing="false" text="Cadastrar" />
-                  </items>
-                </Menu>
                   <Menu mnemonicParsing="false" text="Venda">
                       <items>
                           <MenuItem mnemonicParsing="false" text="Cadastrar" onAction="#cadastrarVenda" />
@@ -45,17 +39,6 @@
                         <MenuItem mnemonicParsing="false" onAction="#pesquisarPedido" text="Buscar" />
                      </items>
                 </Menu>
-
-                  <Menu mnemonicParsing="false" text="Cliente">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                    </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="Conta">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                    </items>
-                  </Menu>
               </menus>
             </MenuBar>
             <AnchorPane fx:id="content" layoutX="188.0" layoutY="28.0" prefHeight="370.0" prefWidth="594.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">

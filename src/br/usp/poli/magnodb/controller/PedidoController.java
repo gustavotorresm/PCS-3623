@@ -47,5 +47,6 @@ public class PedidoController {
         clienteField.setText("Cliente: " + dao.buscarCliente(pedido.getId()));
         
         idField.setText("ID do pedido" + String.valueOf(pedido.getId()));
+        entregaField.setText("ID da entrega: " + dao.buscarEntrega(pedido.getId()));
     }
 }

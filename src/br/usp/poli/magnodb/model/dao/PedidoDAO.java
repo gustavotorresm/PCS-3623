@@ -98,6 +98,26 @@ public class PedidoDAO extends DBConnector {
 
         return cliente;
     }
+    
+    public int buscarEntrega(int id) {
+    	int entrega = 0;
+        try {
+            connect();
+            Connection con = getConnection();
+
+            PreparedStatement statment = con.prepareStatement("SELECT entrega FROM Pedido P, Cliente C, Venda V WHERE (P.id = V.pedido and V.cliente = C.id and P.id = ?)");
+            statment.setInt(1, id);
+
+            ResultSet rs = statment.executeQuery();
+            if (rs.next()) {
+                entrega = rs.getInt("entrega");
+            }
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return entrega;
+    }
 
     public int cadastrarPedido(Pedido pedido) {
         int id = -1;
