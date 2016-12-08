@@ -7,42 +7,70 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ScrollBar;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.*;
 
-import java.io.IOException;
-import java.util.List;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Optional;
 
 public class ProdutoController {
 
     @FXML
-    GridPane root;
+    Label nomeLabel;
 
     @FXML
-    TextField idField, nomeField;
+    TextArea descricaoField;
+
+    @FXML
+    ChoiceBox<Date> precoChoice;
+
+    @FXML
+    Label precoLabel;
+
+    private Produto produto;
+    private HashMap<Date, Float> precos;
+
+    public ProdutoController() {
+        produto = Context.getInstance().getProduto();
+
+        ProdutoDAO dao = ProdutoDAO.getInstance();
+        precos = dao.getPrecos(produto);
+    }
 
     @FXML
     public void initialize() {
+        nomeLabel.setText(produto.getNome());
+        descricaoField.setText(produto.getDescricao());
+
+        ObservableList<Date> datas = FXCollections.observableArrayList();
+        datas.addAll(precos.keySet());
+
+        precoChoice.setItems(datas);
+        precoChoice.setValue(precos.keySet().parallelStream().max(Comparator.comparingLong(x -> x.getTime())).get());
+
+        precoLabel.setText(String.valueOf(produto.getPreco()));
     }
 
-    public void listar() {
-        try {
-            ScrollPane root = FXMLLoader.load(getClass().getResource("/view/produto/lista.fxml"));
-            AnchorPane content = Context.getInstance().getContentPane();
+    @FXML
+    public void atualizarPreco(ActionEvent e) {
+        TextInputDialog dialog = new TextInputDialog(String.valueOf(produto.getPreco()));
+        dialog.setTitle("Atualizar preço");
+        dialog.setHeaderText("Digite o novo valor do produto " + produto.getNome());
+        dialog.setContentText("Preço: ");
 
-            content.getChildren().clear();
-            content.getChildren().add(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Optional<Float> preco = dialog.showAndWait().map(Float::valueOf);
 
+        ProdutoDAO dao = ProdutoDAO.getInstance();
+
+        dao.atualizarPreco(preco.get(), produto);
+
+        Date data = new Date();
+        precos.put(data, preco.get());
+        precoChoice.getItems().add(data);
     }
 
-    public void buscar(ActionEvent e) {
+    public void exibePreco(ActionEvent actionEvent) {
+        precoLabel.setText(String.valueOf(precos.get(precoChoice.getValue())));
     }
 }

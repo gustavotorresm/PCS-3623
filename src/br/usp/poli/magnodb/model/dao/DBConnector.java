@@ -1,5 +1,7 @@
 package br.usp.poli.magnodb.model.dao;
 
+import br.usp.poli.magnodb.model.Produto;
+
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -25,4 +27,7 @@ public abstract class DBConnector {
     protected Connection getConnection() {
         return connection;
     }
+
+
+
 }

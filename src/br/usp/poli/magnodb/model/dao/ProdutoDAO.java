@@ -5,10 +5,9 @@ import br.usp.poli.magnodb.model.Produto;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.sql.Date;
+import java.time.Instant;
+import java.util.*;
 
 /**
  * Created by gustavo on 28/11/16.
@@ -56,7 +55,7 @@ public class ProdutoDAO extends DBConnector {
             connect();
             Connection con = getConnection();
 
-            PreparedStatement statment = con.prepareStatement("SELECT produto.*, preco FROM Produto, Preco " +
+            PreparedStatement statment = con.prepareStatement("SELECT Produto.*, preco FROM Produto, Preco " +
                     "WHERE  id = ? AND produto = id ORDER BY `data` DESC LIMIT 1");
             statment.setInt(1, id);
 
@@ -142,5 +141,53 @@ public class ProdutoDAO extends DBConnector {
         }
 
         return produtos;
+    }
+
+    public void atualizarPreco(Float preco, Produto produto) {
+        String query = "INSERT INTO Preco (produto, preco, data) VALUES (?, ?, ?)";
+
+        try {
+            connect();
+            Connection con = getConnection();
+
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1, produto.getId());
+            stmt.setFloat(2, preco);
+            stmt.setDate(3, new Date(Instant.now().toEpochMilli()));
+
+            stmt.executeUpdate();
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public HashMap<java.util.Date,Float> getPrecos(Produto produto) {
+        String query = "SELECT preco, data FROM Preco WHERE produto = ?";
+        HashMap<java.util.Date, Float> map = new HashMap<>();
+
+        try {
+            connect();
+            Connection con = getConnection();
+
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1, produto.getId());
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                java.util.Date data = rs.getDate("data");
+                Float preco = rs.getFloat("preco");
+
+                map.put(data, preco);
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return map;
     }
 }
