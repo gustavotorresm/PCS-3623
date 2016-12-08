@@ -1,7 +1,7 @@
 package br.usp.poli.magnodb.model.dao.config;
 
-import br.usp.poli.magnodb.model.Usuario;
 import br.usp.poli.magnodb.model.dao.ClienteDAO;
+import br.usp.poli.magnodb.model.dao.EntregaDAO;
 import br.usp.poli.magnodb.model.dao.ProdutoDAO;
 import br.usp.poli.magnodb.model.dao.UsuarioDAO;
 import br.usp.poli.magnodb.model.dao.context.LocalContext;
@@ -44,6 +44,7 @@ public final class DAOSetUp {
         ProdutoDAO.setUpDAO((DataSource) lc.lookup(env));
         ClienteDAO.setUpDAO((DataSource) lc.lookup(env));
         UsuarioDAO.setUpDAO((DataSource) lc.lookup(env));
+        EntregaDAO.setUpDAO((DataSource) lc.lookup(env));
     }
 
     public static void testSetUp() {

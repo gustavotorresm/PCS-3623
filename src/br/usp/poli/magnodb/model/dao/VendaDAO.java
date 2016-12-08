@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -36,8 +38,8 @@ public class VendaDAO extends DBConnector {
         return instance;
     }
 
-    public Set<Venda> buscarVendasPorCliente(Cliente cliente) {
-        Set<Venda> vendas = new TreeSet<Venda>();
+    public List<Venda> buscarVendasPorCliente(Cliente cliente) {
+        List<Venda> vendas = new LinkedList<Venda>();
         try {
             connect();
             Connection con = getConnection();

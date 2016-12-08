@@ -11,6 +11,10 @@ public class Juridico extends Cliente {
 
     public Juridico(String endereço, String nome, String email, String telefone, String cnpj, String porte, String tipo) {
 
+        super.setEndereço(endereço);
+        super.setNome(nome);
+        super.setEmail(email);
+        super.setTelefone(telefone);
         this.cnpj = cnpj;
         this.porte = porte;
         this.tipo = tipo;
