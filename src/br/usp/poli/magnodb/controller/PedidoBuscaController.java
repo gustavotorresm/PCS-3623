@@ -36,11 +36,11 @@ public class PedidoBuscaController {
     }
     
     public void buscar(ActionEvent e) {
-        String id = idField.getText();
+        int id = Integer.valueOf(idField.getText().trim());
 
-        PedidoDAO dao = PedidoDAO.getInstance();
-
-        Pedido pedido = dao.buscarPedido(Integer.parseInt(id));
+        PedidoDAO pdao = PedidoDAO.getInstance();
+        Pedido pedido = null;
+        pedido = pdao.buscarPedido(id);
 
         if (pedido == null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

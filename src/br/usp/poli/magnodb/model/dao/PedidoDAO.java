@@ -58,8 +58,8 @@ public class PedidoDAO extends DBConnector {
     }
 
     public Pedido buscarPedido(int id) {
+    	System.out.println("Caramba!");
         Pedido pedido = null;
-
         try {
             connect();
             Connection con = getConnection();
