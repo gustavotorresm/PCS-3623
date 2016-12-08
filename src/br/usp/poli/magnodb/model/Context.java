@@ -13,6 +13,7 @@ public class Context {
     private Produto produto;
     private List<Entrega> entregas;
     private Pedido pedido;
+    private Cliente cliente;
 
     private static Context ourInstance = new Context();
 
@@ -71,4 +72,13 @@ public class Context {
 	public Pedido getPedido() {
 		return this.pedido;
 	}
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+
+    }
+
+    public Cliente getCliente() {
+        return this.cliente;
+    }
 }

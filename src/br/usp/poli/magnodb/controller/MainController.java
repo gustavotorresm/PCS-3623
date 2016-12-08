@@ -51,9 +51,49 @@ public class MainController {
         }
     }
 
+    public void buscarCliente(ActionEvent e) {
+        try {
+            Parent root = (GridPane) FXMLLoader.load(getClass().getResource("/view/cliente/pesquisar.fxml"));
+            content.getChildren().clear();
+
+            content.getChildren().add(root);
+            root.prefHeight(content.getHeight());
+
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
     public void cadastrarProduto(ActionEvent e) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/view/produto/cadastrar.fxml"));
+            content.getChildren().clear();
+
+            content.getChildren().add(root);
+            root.prefHeight(content.getHeight());
+
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    public void cadastrarClienteFisico(ActionEvent e) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/cliente/cadastrarClienteFisico.fxml"));
+            content.getChildren().clear();
+
+            content.getChildren().add(root);
+            root.prefHeight(content.getHeight());
+
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+
+    public void cadastrarClienteJuridico(ActionEvent e) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/cliente/cadastrarClienteJuridico.fxml"));
             content.getChildren().clear();
 
             content.getChildren().add(root);
