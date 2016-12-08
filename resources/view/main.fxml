@@ -27,11 +27,19 @@
                         <MenuItem mnemonicParsing="false" onAction="#pesquisarEntrega" text="Pesquisar" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Pedidos">
+                
+                <Menu mnemonicParsing="false" text="Produtos">
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#buscarProduto" text="Buscar" />
                         <MenuItem mnemonicParsing="false" onAction="#cadastrarProduto" text="Cadastrar" />
-                     </items></Menu>
+                     </items>
+                </Menu>
+                
+                <Menu mnemonicParsing="false" text="Pedidos">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#pesquisarPedido" text="Buscar" />
+                     </items>
+                </Menu>
 
                   <Menu mnemonicParsing="false" text="Cliente">
                     <items>
