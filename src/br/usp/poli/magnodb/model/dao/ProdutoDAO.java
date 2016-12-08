@@ -35,12 +35,23 @@ public class ProdutoDAO extends DBConnector {
 
             PreparedStatement statement = con.prepareStatement("INSERT INTO Produto " +
                     "(nome, descricao, data_criacao) " +
-                    "VALUES (?, ?, ?)");
+                    "VALUES (?, ?, ?)",
+                    Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, produto.getNome());
             statement.setString(2, produto.getDescricao());
             statement.setDate(3, new Date(produto.getCriacao().getTime()));
 
             statement.executeUpdate();
+
+            ResultSet rs = statement.getGeneratedKeys();
+            if (!rs.next()) {
+                con.close();
+                throw new SQLException();
+            }
+
+            produto.setId(rs.getInt(1));
+
+            atualizarPreco(produto.getPreco(), produto);
 
             con.close();
         } catch (SQLException e) {
