@@ -56,13 +56,19 @@ public class ProdutoListaController {
         produtosList = FXCollections.observableArrayList();
 
         List<Produto> produtos = dao.listarProdutos();
+        produtos.forEach(
+                p ->{
+                    System.out.println(p.getPreco());
+                    System.out.println(p.getQuantidadeVendida());
+                }
+        );
         produtos.forEach(produtosList::add);
 
         maxPreco = produtos.parallelStream().max(Comparator.comparingDouble(Produto::getPreco)).map(Produto::getPreco).get();
         minPreco = produtos.parallelStream().min(Comparator.comparingDouble(Produto::getPreco)).map(Produto::getPreco).get();
 
-        maxUltimoVendido = produtos.parallelStream().max(Comparator.comparing(p -> p.getUltimaVenda())).map(Produto::getUltimaVenda).get();
-        minUltimoVendido = produtos.parallelStream().min(Comparator.comparing(p -> p.getUltimaVenda())).map(Produto::getUltimaVenda).get();
+        maxUltimoVendido = produtos.parallelStream().filter(p -> p.getUltimaVenda() != null).max(Comparator.comparing(p -> p.getUltimaVenda())).map(Produto::getUltimaVenda).get();
+        minUltimoVendido = produtos.parallelStream().filter(p -> p.getUltimaVenda() != null).min(Comparator.comparing(p -> p.getUltimaVenda())).map(Produto::getUltimaVenda).get();
 
         maxQuantidade = produtos.parallelStream().max(Comparator.comparingInt(Produto::getQuantidadeVendida)).map(Produto::getQuantidadeVendida).get();
         minQuantidade = produtos.parallelStream().min(Comparator.comparingInt(Produto::getQuantidadeVendida)).map(Produto::getQuantidadeVendida).get();
@@ -211,8 +217,8 @@ public class ProdutoListaController {
 
     private void filter() {
         ObservableList<Produto> newSearch = produtosList.filtered(produto -> produto.getPreco() >= lowPreco && produto.getPreco() <= highPreco);
-        newSearch = newSearch.filtered(produto -> produto.getQuantidadeVendida() >= lowQuantidade && produto.getQuantidadeVendida() <= highQuantidade);
-        newSearch = newSearch.filtered(produto -> produto.getUltimaVenda().compareTo(lowUltimoVendido) >= 0 && produto.getUltimaVenda().compareTo(highUltimoVendido) <= 0);
+        newSearch = newSearch.filtered(p -> p.getUltimaVenda() != null).filtered(produto -> produto.getQuantidadeVendida() >= lowQuantidade && produto.getQuantidadeVendida() <= highQuantidade);
+        newSearch = newSearch.filtered(p -> p.getUltimaVenda() != null).filtered(produto -> produto.getUltimaVenda().compareTo(lowUltimoVendido) >= 0 && produto.getUltimaVenda().compareTo(highUltimoVendido) <= 0);
 
         tabela.setItems(newSearch);
     }

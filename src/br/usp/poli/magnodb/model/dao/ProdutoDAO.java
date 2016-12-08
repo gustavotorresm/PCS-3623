@@ -9,9 +9,6 @@ import java.sql.Date;
 import java.time.Instant;
 import java.util.*;
 
-/**
- * Created by gustavo on 28/11/16.
- */
 public class ProdutoDAO extends DBConnector {
 
     private static ProdutoDAO instance;
@@ -39,7 +36,7 @@ public class ProdutoDAO extends DBConnector {
                     Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, produto.getNome());
             statement.setString(2, produto.getDescricao());
-            statement.setDate(3, new Date(produto.getCriacao().getTime()));
+            statement.setTimestamp(3, new Timestamp(produto.getCriacao().getTime()));
 
             statement.executeUpdate();
 
@@ -124,13 +121,13 @@ public class ProdutoDAO extends DBConnector {
             connect();
             Connection con = getConnection();
 
-            String query = "SELECT P.*, preco, (SELECT SUM(I.quantidade) AS quantidade FROM Item I WHERE P.id = produto) AS quantidade, Pd.data AS data " +
+            String query = "SELECT P.*, preco, (SELECT SUM(I.quantidade) AS quantidade FROM Item I WHERE P.id = produto) AS quantidade, MAX(Pd.data) AS data " +
             "FROM Produto P " +
-            "JOIN Preco Pr ON (P.id = produto) " +
-            "JOIN Item I ON P.id = I.produto " +
-            "JOIN Pedido Pd ON I.pedido = Pd.id " +
+            "LEFT JOIN Preco Pr ON (P.id = produto) " +
+            "LEFT JOIN Item I ON P.id = I.produto " +
+            "LEFT JOIN Pedido Pd ON I.pedido = Pd.id " +
             "WHERE  Pr.data=(SELECT MAX(data) FROM Preco Pr WHERE Pr.produto = P.id) " +
-            "AND Pd.data=(SELECT MAX(data) FROM Pedido Pd, Item I WHERE I.pedido = Pd.id AND I.produto = P.id)";
+            "GROUP BY P.id";
 
             System.out.println(query);
 
@@ -164,7 +161,7 @@ public class ProdutoDAO extends DBConnector {
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setInt(1, produto.getId());
             stmt.setFloat(2, preco);
-            stmt.setDate(3, new Date(Instant.now().toEpochMilli()));
+            stmt.setTimestamp(3, new Timestamp(Instant.now().toEpochMilli()));
 
             stmt.executeUpdate();
 
