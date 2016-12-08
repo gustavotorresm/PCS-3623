@@ -19,6 +19,11 @@
                     <MenuItem mnemonicParsing="false" text="Cadastrar" />
                   </items>
                 </Menu>
+                  <Menu mnemonicParsing="false" text="Venda">
+                      <items>
+                          <MenuItem mnemonicParsing="false" text="Cadastrar" onAction="#cadastrarVenda" />
+                      </items>
+                  </Menu>
                 <Menu mnemonicParsing="false" text="Entrega">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#estatisticaEntrega" text="Estatísticas" />

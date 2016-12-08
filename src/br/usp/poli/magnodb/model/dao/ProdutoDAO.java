@@ -64,7 +64,7 @@ public class ProdutoDAO extends DBConnector {
             Connection con = getConnection();
 
             PreparedStatement statment = con.prepareStatement("SELECT Produto.*, preco FROM Produto, Preco " +
-                    "WHERE  id = ? AND produto = id ORDER BY `data` DESC LIMIT 1");
+                    "WHERE  Produto.id = ? AND produto = Produto.id ORDER BY `data` DESC LIMIT 1");
             statment.setInt(1, id);
 
             ResultSet rs = statment.executeQuery();
@@ -112,6 +112,29 @@ public class ProdutoDAO extends DBConnector {
 
     public static ProdutoDAO getInstance() {
         return instance;
+    }
+
+    public List<Produto> listarTodosProdutos() {
+        List<Produto> produtos = new LinkedList<>();
+        try {
+            connect();
+            Connection con = getConnection();
+            PreparedStatement statement = con.prepareStatement("SELECT Produto.*, preco FROM Produto " +
+                    "INNER JOIN Preco ON Produto.id = Preco.produto");
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Produto produto = new Produto(rs.getString("nome"), rs.getString("descricao"),
+                        rs.getDate("data_criacao"), rs.getFloat("preco"));
+                produto.setId(rs.getInt("id"));
+
+                produtos.add(produto);
+            }
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return produtos;
     }
 
     public List<Produto> listarProdutos() {

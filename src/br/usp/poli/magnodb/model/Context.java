@@ -12,10 +12,12 @@ public class Context {
     private Stage stage;
     private Produto produto;
     private List<Entrega> entregas;
-    private Pedido pedido;
-    private Cliente cliente;
+    private Venda venda;
 
     private static Context ourInstance = new Context();
+    private List<Item> itens;
+    private Pedido pedido;
+    private Cliente cliente;
 
     public static Context getInstance() {
         return ourInstance;
@@ -64,21 +66,37 @@ public class Context {
         this.entregas = entregas;
     }
 
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
-		
-	}
 
-	public Pedido getPedido() {
-		return this.pedido;
-	}
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-
-    }
 
     public Cliente getCliente() {
         return this.cliente;
+    }
+
+    public void setVenda(Venda venda) {
+        this.venda = venda;
+    }
+
+    public void setItens(List<Item> itens) {
+        this.itens = itens;
+    }
+
+    public List<Item> getItens() {
+        return itens;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public Venda getVenda() {
+        return venda;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

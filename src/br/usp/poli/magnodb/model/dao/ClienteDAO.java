@@ -126,7 +126,8 @@ public class ClienteDAO extends DBConnector {
 
             PreparedStatement statement = con.prepareStatement("SELECT * FROM Cliente " +
                     "LEFT JOIN Fisico ON Cliente.id = Fisico.id " +
-                    "LEFT JOIN Juridico ON Cliente.id = Juridico.id");
+                    "LEFT JOIN Juridico ON Cliente.id = Juridico.id " +
+                    "ORDER BY Cliente.id ASC");
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Cliente cliente = null;

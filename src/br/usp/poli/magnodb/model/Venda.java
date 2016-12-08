@@ -23,6 +23,9 @@ public class Venda {
         this.notaFiscal = notaFiscal;
     }
 
+    public Venda(){}
+
+    public void setCliente(Cliente cliente) {this.cliente = cliente;}
 
     public Cliente getCliente() {
         return cliente;
@@ -46,5 +49,9 @@ public class Venda {
 
     public String getNotaFiscal() {
         return notaFiscal;
+    }
+
+    public void setEntrega(Entrega entrega) {
+        this.entrega = entrega;
     }
 }

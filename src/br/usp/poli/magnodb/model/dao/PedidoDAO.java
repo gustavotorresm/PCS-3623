@@ -4,10 +4,7 @@ import br.usp.poli.magnodb.model.Pedido;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -80,9 +77,9 @@ public class PedidoDAO extends DBConnector {
 
         return pedido;
     }
-    
+
     public String buscarCliente(int id) {
-    	String cliente = null;
+        String cliente = null;
         try {
             connect();
             Connection con = getConnection();
@@ -92,7 +89,7 @@ public class PedidoDAO extends DBConnector {
 
             ResultSet rs = statment.executeQuery();
             if (rs.next()) {
-            	cliente = rs.getString("nome");
+                cliente = rs.getString("nome");
             }
             con.close();
         } catch (SQLException e) {
@@ -100,5 +97,33 @@ public class PedidoDAO extends DBConnector {
         }
 
         return cliente;
+    }
+
+    public int cadastrarPedido(Pedido pedido) {
+        int id = -1;
+        try {
+            connect();
+            Connection con = getConnection();
+            PreparedStatement statement = con.prepareStatement("INSERT INTO Pedido " +
+                    "(data) " +
+                    "VALUES (?)");
+            statement.setDate(1, new Date(pedido.getData().getTime()));
+
+            statement.executeUpdate();
+
+            statement = con.prepareStatement("SELECT LAST_INSERT_ID() AS id");
+            ResultSet rs = statement.executeQuery();
+
+            if(rs.next()) {
+                id = rs.getInt("id");
+            }
+
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+
     }
 }

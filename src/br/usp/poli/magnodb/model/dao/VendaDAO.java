@@ -7,10 +7,7 @@ import br.usp.poli.magnodb.model.Venda;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -61,5 +58,28 @@ public class VendaDAO extends DBConnector {
         }
 
         return vendas;
+    }
+
+    public void cadastrarVenda(Venda venda) {
+        try {
+            connect();
+            Connection con = getConnection();
+
+            PreparedStatement statement = con.prepareStatement("INSERT INTO Venda " +
+                    "VALUES (?, ?, ?, ?, ?, ?)");
+            statement.setInt(1, venda.getCliente().getId());
+            statement.setInt(2, venda.getEntrega().getId());
+            statement.setInt(3, venda.getPedido().getId());
+            statement.setTimestamp(4, new Timestamp(venda.getDataPagamento().getTime()));
+            statement.setFloat(5, venda.getDesconto());
+            statement.setString(6, venda.getNotaFiscal());
+
+            statement.executeUpdate();
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

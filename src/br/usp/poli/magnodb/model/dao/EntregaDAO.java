@@ -30,7 +30,8 @@ public class EntregaDAO extends DBConnector {
         return instance;
     }
 
-    public void cadastrarEntrega(Entrega entrega) {
+    public int cadastrarEntrega(Entrega entrega) {
+        int id = -1;
         try {
             connect();
             Connection con = getConnection();
@@ -45,11 +46,19 @@ public class EntregaDAO extends DBConnector {
 
             statement.executeUpdate();
 
+            statement = con.prepareStatement("SELECT LAST_INSERT_ID() AS id");
+            ResultSet rs = statement.executeQuery();
+
+            if(rs.next()) {
+                id = rs.getInt("id");
+            }
+
             con.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return id;
     }
 
 
