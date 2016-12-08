@@ -1,5 +1,6 @@
 package br.usp.poli.magnodb;
 
+import br.usp.poli.magnodb.model.Context;
 import br.usp.poli.magnodb.model.dao.config.DAOSetUp;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -26,5 +27,7 @@ public class Main extends Application{
         primaryStage.setScene(new Scene(root, 800, 600));
 
         primaryStage.show();
+
+        Context.getInstance().setStage(primaryStage);
     }
 }

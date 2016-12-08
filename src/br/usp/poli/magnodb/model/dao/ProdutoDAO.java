@@ -56,12 +56,13 @@ public class ProdutoDAO extends DBConnector {
             connect();
             Connection con = getConnection();
 
-            PreparedStatement statment = con.prepareStatement("SELECT * FROM Produto WHERE  id = ?");
+            PreparedStatement statment = con.prepareStatement("SELECT produto.*, preco FROM Produto, Preco " +
+                    "WHERE  id = ? AND produto = id ORDER BY `data` DESC LIMIT 1");
             statment.setInt(1, id);
 
             ResultSet rs = statment.executeQuery();
             if (rs.next()) {
-                produto = new Produto(rs.getString("nome"), rs.getString("descricao"));
+                produto = new Produto(rs.getString("nome"), rs.getString("descricao"), rs.getDate("data_criacao"), rs.getFloat("preco"));
                 produto.setId(rs.getInt("id"));
             }
 
@@ -80,12 +81,15 @@ public class ProdutoDAO extends DBConnector {
             connect();
             Connection con = getConnection();
 
-            PreparedStatement statment = con.prepareStatement("SELECT * FROM Produto WHERE  nome LIKE ?");
+            String query = "SELECT P.*, preco FROM Produto P JOIN Preco ON (id = produto) " +
+            "WHERE nome LIKE ? AND data=(SELECT MAX(data) FROM Preco WHERE produto = P.id)";
+
+            PreparedStatement statment = con.prepareStatement(query);
             statment.setString(1, nome);
 
             ResultSet rs = statment.executeQuery();
             while (rs.next()) {
-                Produto produto = new Produto(rs.getString("nome"), rs.getString("descricao"));
+                Produto produto = new Produto(rs.getString("nome"), rs.getString("descricao"), rs.getDate("data_criacao"), rs.getFloat("preco"));
                 produto.setId(rs.getInt("id"));
 
                 produtos.add(produto);
@@ -110,11 +114,23 @@ public class ProdutoDAO extends DBConnector {
             connect();
             Connection con = getConnection();
 
-            PreparedStatement statment = con.prepareStatement("SELECT * FROM Produto");
+            String query = "SELECT P.*, preco, (SELECT SUM(I.quantidade) AS quantidade FROM Item I WHERE P.id = produto) AS quantidade, Pd.data AS data " +
+            "FROM Produto P " +
+            "JOIN Preco Pr ON (P.id = produto) " +
+            "JOIN Item I ON P.id = I.produto " +
+            "JOIN Pedido Pd ON I.pedido = Pd.id " +
+            "WHERE  Pr.data=(SELECT MAX(data) FROM Preco Pr WHERE Pr.produto = P.id) " +
+            "AND Pd.data=(SELECT MAX(data) FROM Pedido Pd, Item I WHERE I.pedido = Pd.id AND I.produto = P.id)";
+
+            System.out.println(query);
+
+            PreparedStatement statment = con.prepareStatement(query);
 
             ResultSet rs = statment.executeQuery();
             while (rs.next()) {
-                Produto produto = new Produto(rs.getString("nome"), rs.getString("descricao"));
+                Produto produto = new Produto(rs.getString("nome"), rs.getString("descricao"), rs.getDate("data_criacao"), rs.getFloat("preco"));
+                produto.setUltimaVenda(rs.getDate("data"));
+                produto.setQuantidadeVendida(rs.getInt("quantidade"));
                 produto.setId(rs.getInt("id"));
 
                 produtos.add(produto);

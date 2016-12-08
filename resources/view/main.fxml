@@ -21,11 +21,13 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Entrega">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Estatísticas" onAction="#estatisticaEntrega" />
+                        <MenuItem mnemonicParsing="false" onAction="#estatisticaEntrega" text="Estatísticas" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Pedidos">
-                </Menu>
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#buscarProduto" text="Buscar" />
+                     </items></Menu>
 
                   <Menu mnemonicParsing="false" text="Cliente">
                     <items>
