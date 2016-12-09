@@ -49,7 +49,7 @@
                                     <VBox alignment="CENTER" layoutX="15.0" layoutY="150.0" GridPane.columnIndex="2">
                                        <children>
                                           <RangeSlider fx:id="ultimaVendaSlider" highValueChanging="true" lowValueChanging="true" majorTickUnit="1.0" minorTickCount="1" onMouseReleased="#checkUltimaVendaSlider" showTickLabels="true" showTickMarks="true" />
-                                          <Label contentDisplay="CENTER" text="Data da última venda" />
+                                          
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="343.0" layoutY="10.0" GridPane.columnSpan="3" GridPane.rowIndex="1">

@@ -52,7 +52,7 @@
         </VBox>
         <StackPane GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
             <children>
-                <Label prefHeight="30.0" prefWidth="347.0" text="Estatísticas de entrega">
+                <Label prefHeight="30.0" prefWidth="347.0" text="Venda">
                     <font>
                         <Font name="System Bold" size="24.0" />
                     </font>

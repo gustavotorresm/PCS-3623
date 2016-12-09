@@ -118,6 +118,7 @@ public class ProdutoListaController {
         	
         quantidadeSlider.setHighValue(maxQuantidade);
         quantidadeSlider.setLowValue(minQuantidade);
+        
 
         /*
          * Última venda slider
@@ -156,6 +157,8 @@ public class ProdutoListaController {
                 return time;
             }
         });
+        
+        ultimaVendaSlider.setVisible(false);
 
         tabela.setItems(produtosList);
 
@@ -229,8 +232,8 @@ public class ProdutoListaController {
 
     private void filter() {
         ObservableList<Produto> newSearch = produtosList.filtered(produto -> produto.getPreco() >= lowPreco && produto.getPreco() <= highPreco);
-        newSearch = newSearch.filtered(p -> p.getUltimaVenda() != null).filtered(produto -> produto.getQuantidadeVendida() >= lowQuantidade && produto.getQuantidadeVendida() <= highQuantidade);
-        newSearch = newSearch.filtered(p -> p.getUltimaVenda() != null).filtered(produto -> produto.getUltimaVenda().compareTo(lowUltimoVendido) >= 0 && produto.getUltimaVenda().compareTo(highUltimoVendido) <= 0);
+        newSearch = newSearch.filtered(produto -> produto.getQuantidadeVendida() >= lowQuantidade && produto.getQuantidadeVendida() <= highQuantidade);
+        // newSearch = newSearch.filtered(p -> p.getUltimaVenda() != null).filtered(produto -> produto.getUltimaVenda().compareTo(lowUltimoVendido) >= 0 && produto.getUltimaVenda().compareTo(highUltimoVendido) <= 0);
 
         tabela.setItems(newSearch);
     }
